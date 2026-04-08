@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Viintas — Tecnología para tu negocio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* === COLOR SYSTEM — swap these to retheme === */
+  --bg-primary: #000000;        /* Main background */
+  --bg-secondary: #0a0a0a;      /* Alternate section bg */
+  --bg-card: #111111;            /* Card backgrounds */
+  --text-primary: #ffffff;       /* Main text */
+  --text-secondary: #888888;     /* Muted text */
+  --text-tertiary: #555555;      /* Very muted */
+  --accent: #2997ff;             /* Primary accent (links, buttons) */
+  --accent-hover: #0077ed;       /* Accent hover state */
+  --border: #222222;             /* Borders */
+  --form-bg: #1a1a1a;            /* Form input bg */
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* === NAV === */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  background: rgba(0,0,0,0.72);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1024px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 24px;
+}
+.logo { font-size: 1.25rem; font-weight: 700; letter-spacing: 0.08em; color: var(--text-primary); text-decoration: none; }
+nav a:not(.logo) { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+nav a:not(.logo):hover { color: var(--text-primary); }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+
+/* === SECTIONS === */
+section {
+  min-height: 100vh; display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  padding: 120px 24px 80px;
+  text-align: center;
+}
+.section-alt { background: var(--bg-secondary); }
+
+/* === FADE-IN ANIMATION === */
+.fade-in {
+  opacity: 0; transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* === HERO === */
+.hero h1 {
+  font-size: clamp(2.8rem, 8vw, 5.5rem);
+  font-weight: 700; line-height: 1.05;
+  letter-spacing: -0.03em;
+  max-width: 900px;
+}
+.hero h1 span { color: var(--accent); }
+.hero p {
+  margin-top: 24px; font-size: clamp(1rem, 2.5vw, 1.35rem);
+  color: var(--text-secondary); max-width: 600px; line-height: 1.6;
+  font-weight: 300;
+}
+.hero-cta {
+  margin-top: 40px; display: inline-block;
+  padding: 14px 32px; border-radius: 980px;
+  background: var(--accent); color: #fff;
+  text-decoration: none; font-size: 1.05rem; font-weight: 500;
+  transition: background 0.2s;
+}
+.hero-cta:hover { background: var(--accent-hover); }
+
+/* === VALUE PROP === */
+.value-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 48px; max-width: 960px; margin-top: 64px; text-align: left;
+}
+.value-item h3 { font-size: 1.5rem; font-weight: 600; margin-bottom: 12px; }
+.value-item p { color: var(--text-secondary); line-height: 1.7; font-weight: 300; }
+.section-label {
+  font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em;
+  color: var(--accent); margin-bottom: 16px; font-weight: 500;
+}
+.section-title {
+  font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700;
+  letter-spacing: -0.02em; max-width: 700px; line-height: 1.1;
+}
+.section-sub {
+  margin-top: 20px; color: var(--text-secondary); font-size: 1.1rem;
+  max-width: 560px; line-height: 1.6; font-weight: 300;
+}
+
+/* === STATS === */
+.stats-row {
+  display: flex; flex-wrap: wrap; gap: 64px; justify-content: center;
+  margin-top: 64px;
+}
+.stat h2 { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 700; letter-spacing: -0.02em; }
+.stat p { color: var(--text-secondary); margin-top: 4px; font-size: 0.95rem; }
+
+/* === FORM === */
+.form-section { background: var(--bg-secondary); }
+.form-container {
+  max-width: 480px; width: 100%; margin-top: 48px;
+}
+.form-container input, .form-container select {
+  width: 100%; padding: 16px 20px; margin-bottom: 12px;
+  background: var(--form-bg); border: 1px solid var(--border);
+  border-radius: 12px; color: var(--text-primary);
+  font-size: 1rem; font-family: inherit; outline: none;
+  transition: border-color 0.2s;
+}
+.form-container input:focus, .form-container select:focus {
+  border-color: var(--accent);
+}
+.form-container input::placeholder { color: var(--text-tertiary); }
+.form-container select { appearance: none; cursor: pointer; }
+.form-container select option { background: var(--bg-card); }
+.submit-btn {
+  width: 100%; padding: 16px; border: none; border-radius: 980px;
+  background: var(--accent); color: #fff; font-size: 1.05rem;
+  font-weight: 600; cursor: pointer; font-family: inherit;
+  transition: background 0.2s; margin-top: 8px;
+}
+.submit-btn:hover { background: var(--accent-hover); }
+
+/* === FOOTER === */
+footer {
+  padding: 48px 24px; text-align: center;
+  border-top: 1px solid var(--border);
+  color: var(--text-tertiary); font-size: 0.85rem;
+}
+.footer-links { display: flex; gap: 24px; justify-content: center; margin-bottom: 16px; flex-wrap: wrap; }
+.footer-links a { color: var(--text-secondary); text-decoration: none; }
+.footer-links a:hover { color: var(--text-primary); }
+
+@media (max-width: 600px) {
+  .nav-links a:not(:last-child) { display: none; }
+  .stats-row { gap: 40px; }
+  section { padding: 100px 20px 60px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">VIINTAS</a>
+    <div class="nav-links">
+      <a href="#producto">Producto</a>
+      <a href="#negocios">Negocios</a>
+      <a href="#registro">Comenzar</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="fade-in">
+    <h1>Tu negocio, <span>al siguiente nivel.</span></h1>
+    <p>Tecnología diseñada específicamente para cada tipo de negocio local. Simple, poderosa, hecha para LATAM.</p>
+    <a href="#registro" class="hero-cta">Comenzar gratis</a>
+  </div>
+</section>
+
+<section class="section-alt" id="producto">
+  <div class="fade-in">
+    <span class="section-label">Producto</span>
+    <h2 class="section-title">La herramienta que un ingeniero construiría para el negocio de barrio.</h2>
+    <p class="section-sub">Viintas adapta su tecnología a las necesidades reales de cada negocio. Sin plantillas genéricas. Sin complejidad innecesaria.</p>
+  </div>
+  <div class="value-grid fade-in">
+    <div class="value-item">
+      <h3>Hecho a medida</h3>
+      <p>Cada solución se adapta al tipo de negocio. No es un software genérico — es tu herramienta específica.</p>
+    </div>
+    <div class="value-item">
+      <h3>Simple de usar</h3>
+      <p>Interfaz limpia, flujos intuitivos. Tu equipo lo adopta en minutos, no en semanas.</p>
+    </div>
+    <div class="value-item">
+      <h3>Resultados reales</h3>
+      <p>Más eficiencia, menos errores, mejor experiencia para tus clientes. Desde el día uno.</p>
+    </div>
+  </div>
+</section>
+
+<section id="negocios">
+  <div class="fade-in">
+    <span class="section-label">Para tu negocio</span>
+    <h2 class="section-title">Cada negocio es diferente. Tu tecnología también debería serlo.</h2>
+    <p class="section-sub">Trabajamos con todo tipo de negocios locales. Nuestra tecnología se moldea a tu operación, no al revés.</p>
+  </div>
+  <div class="stats-row fade-in">
+    <div class="stat">
+      <h2>500+</h2>
+      <p>Negocios impulsados</p>
+    </div>
+    <div class="stat">
+      <h2>12</h2>
+      <p>Países en LATAM</p>
+    </div>
+    <div class="stat">
+      <h2>98%</h2>
+      <p>Tasa de retención</p>
+    </div>
+  </div>
+</section>
+
+<section class="form-section" id="registro">
+  <div class="fade-in">
+    <span class="section-label">Empieza hoy</span>
+    <h2 class="section-title">Impulsa tu negocio.</h2>
+    <p class="section-sub">Regístrate y te contactamos para configurar tu solución personalizada.</p>
+    <div class="form-container">
+      <input type="text" placeholder="Tu nombre" required>
+      <input type="email" placeholder="Correo electrónico" required>
+      <input type="text" placeholder="Nombre de tu negocio" required>
+      <input type="tel" placeholder="Teléfono" required>
+      <select required>
+        <option value="" disabled selected>Tipo de negocio</option>
+        <option>Comercio / Tienda</option>
+        <option>Servicios profesionales</option>
+        <option>Alimentos y bebidas</option>
+        <option>Salud y bienestar</option>
+        <option>Educación</option>
+        <option>Otro</option>
+      </select>
+      <button class="submit-btn">Comenzar gratis →</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-links">
+    <a href="#">Producto</a>
+    <a href="#">Precios</a>
+    <a href="#">Contacto</a>
+    <a href="#">Privacidad</a>
+    <a href="#">Términos</a>
+  </div>
+  <p>© 2026 Viintas. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+
+<script>
+
+window.__PALETTES = [
+  {name:"Original",desc:"Negro + azul Apple",vars:{"--bg-primary":"#000000","--bg-secondary":"#0a0a0a","--bg-card":"#111111","--text-primary":"#ffffff","--text-secondary":"#888888","--accent":"#2997ff","--accent-hover":"#0077ed","--border":"#222222","--form-bg":"#1a1a1a"}},
+  {name:"Midnight Emerald",desc:"Negro profundo + verde esmeralda",vars:{"--bg-primary":"#000000","--bg-secondary":"#060d08","--bg-card":"#0a1a0f","--text-primary":"#f0f0f0","--text-secondary":"#7a9a85","--accent":"#10b981","--accent-hover":"#059669","--border":"#1a2e22","--form-bg":"#0d1f14"}},
+  {name:"Warm Sunset",desc:"Oscuro cálido + naranja",vars:{"--bg-primary":"#0a0504","--bg-secondary":"#120a06","--bg-card":"#1a0f08","--text-primary":"#fff5eb","--text-secondary":"#99826a","--accent":"#f97316","--accent-hover":"#ea580c","--border":"#2a1a0e","--form-bg":"#1a1008"}},
+  {name:"Royal Purple",desc:"Negro + púrpura vibrante",vars:{"--bg-primary":"#030008","--bg-secondary":"#080012","--bg-card":"#10081a","--text-primary":"#f5f0ff","--text-secondary":"#8a7aaa","--accent":"#a855f7","--accent-hover":"#9333ea","--border":"#1a1030","--form-bg":"#120a20"}},
+  {name:"Ocean Blue",desc:"Azul profundo + cyan",vars:{"--bg-primary":"#000408","--bg-secondary":"#00080f","--bg-card":"#001020","--text-primary":"#e8f4ff","--text-secondary":"#6a99bb","--accent":"#06b6d4","--accent-hover":"#0891b2","--border":"#0a2035","--form-bg":"#001525"}},
+  {name:"Light Mode",desc:"Fondo claro, profesional",vars:{"--bg-primary":"#ffffff","--bg-secondary":"#f5f5f7","--bg-card":"#ffffff","--text-primary":"#1d1d1f","--text-secondary":"#6e6e73","--accent":"#0066cc","--accent-hover":"#004499","--border":"#d2d2d7","--form-bg":"#f5f5f7"}},
+  {name:"Coral Rose",desc:"Dark + coral rosado",vars:{"--bg-primary":"#0a0406","--bg-secondary":"#120608","--bg-card":"#1a0a0e","--text-primary":"#fff0f2","--text-secondary":"#aa7a80","--accent":"#fb7185","--accent-hover":"#f43f5e","--border":"#2a1418","--form-bg":"#1a0c10"}}
+];
+</script>
+<script>
+// Palette switcher widget - inject into each landing page
+// Each page defines its own palettes in window.__PALETTES array
+(function(){
+  const palettes = window.__PALETTES || [];
+  if(!palettes.length) return;
+  
+  const root = document.documentElement;
+  let currentIdx = 0;
+  
+  // Create widget
+  const btn = document.createElement('div');
+  btn.innerHTML = '🎨';
+  Object.assign(btn.style, {position:'fixed',bottom:'24px',right:'24px',zIndex:'99999',width:'52px',height:'52px',borderRadius:'50%',background:'rgba(20,20,20,0.9)',border:'1px solid rgba(255,255,255,0.15)',cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'24px',boxShadow:'0 4px 24px rgba(0,0,0,0.5)',transition:'transform 0.2s',backdropFilter:'blur(12px)'});
+  btn.onmouseover=()=>btn.style.transform='scale(1.1)';
+  btn.onmouseout=()=>btn.style.transform='scale(1)';
+  
+  const panel = document.createElement('div');
+  panel.id = 'palette-panel';
+  Object.assign(panel.style, {position:'fixed',bottom:'88px',right:'24px',zIndex:'99999',width:'300px',background:'rgba(15,15,20,0.95)',border:'1px solid rgba(255,255,255,0.1)',borderRadius:'16px',padding:'0',boxShadow:'0 8px 40px rgba(0,0,0,0.6)',backdropFilter:'blur(16px)',fontFamily:'-apple-system,system-ui,sans-serif',overflow:'hidden',transform:'scale(0.9) translateY(10px)',opacity:'0',pointerEvents:'none',transition:'transform 0.25s ease, opacity 0.2s ease',maxHeight:'80vh',overflowY:'auto'});
+  
+  let open = false;
+  btn.onclick = () => {
+    open = !open;
+    panel.style.transform = open ? 'scale(1) translateY(0)' : 'scale(0.9) translateY(10px)';
+    panel.style.opacity = open ? '1' : '0';
+    panel.style.pointerEvents = open ? 'auto' : 'none';
+  };
+  
+  function applyPalette(idx) {
+    currentIdx = idx;
+    const p = palettes[idx];
+    Object.entries(p.vars).forEach(([k,v]) => root.style.setProperty(k, v));
+    renderPanel();
+  }
+  
+  function renderPanel() {
+    let html = `<div style="padding:14px 18px 10px;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center">
+      <span style="color:#fff;font-size:13px;font-weight:600;letter-spacing:0.03em">🎨 Paletas</span>
+      <button onclick="document.getElementById('palette-panel').querySelector('[data-copy]').click()" style="padding:4px 12px;font-size:11px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:6px;color:#aaa;cursor:pointer;font-family:inherit">📋 Copiar CSS</button>
+    </div><div style="padding:12px 14px">`;
+    
+    palettes.forEach((p, i) => {
+      const active = i === currentIdx;
+      const colors = Object.values(p.vars).slice(0, 5);
+      html += `<div onclick="window.__applyPalette(${i})" style="display:flex;align-items:center;gap:12px;padding:10px 12px;margin-bottom:8px;border-radius:10px;cursor:pointer;border:2px solid ${active ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.05)'};background:${active ? 'rgba(255,255,255,0.06)' : 'transparent'};transition:all 0.2s">
+        <div style="display:flex;gap:4px;flex-shrink:0">
+          ${colors.map(c => `<div style="width:22px;height:22px;border-radius:50%;background:${c};border:1px solid rgba(255,255,255,0.1)"></div>`).join('')}
+        </div>
+        <div>
+          <div style="color:#fff;font-size:12px;font-weight:600">${p.name}</div>
+          <div style="color:#666;font-size:10px">${p.desc || ''}</div>
+        </div>
+      </div>`;
+    });
+    
+    html += `</div><button data-copy style="display:none"></button>`;
+    panel.innerHTML = html;
+    panel.querySelector('[data-copy]').onclick = () => {
+      let css = ':root {\n';
+      Object.entries(palettes[currentIdx].vars).forEach(([k,v]) => { css += `  ${k}: ${v};\n`; });
+      css += '}';
+      navigator.clipboard.writeText(css).then(() => {
+        const b = panel.querySelector('button:not([data-copy])');
+        if(b){b.textContent='✓ Copiado';setTimeout(()=>b.textContent='📋 Copiar CSS',1500);}
+      });
+    };
+  }
+  
+  window.__applyPalette = applyPalette;
+  renderPanel();
+  document.body.appendChild(panel);
+  document.body.appendChild(btn);
+})();
+
+</script>
+
+</body>
+</html>

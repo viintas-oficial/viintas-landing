@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIINTAS — Impulsa tu negocio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* === COLOR SYSTEM — swap to retheme === */
+  --bg: #0a0a0a;                /* Base background */
+  --bg-alt: #111111;            /* Alternate blocks */
+  --text: #e8e8e8;              /* Primary text */
+  --text-muted: #777777;        /* Secondary text */
+  --accent: #ff3c00;            /* Primary accent — hot orange */
+  --accent-2: #00ff88;          /* Secondary accent — electric green */
+  --accent-3: #ffee00;          /* Tertiary accent — yellow */
+  --border: #333333;            /* Borders */
+  --form-bg: #161616;           /* Form inputs */
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  font-family: 'Space Grotesk', monospace;
+  background: var(--bg); color: var(--text);
+  overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: var(--bg); border-bottom: 3px solid var(--accent);
+  padding: 16px 24px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.logo { font-family: 'Space Mono', monospace; font-size: 1.5rem; font-weight: 700; color: var(--accent); text-decoration: none; letter-spacing: 0.1em; }
+.nav-links { display: flex; gap: 24px; }
+.nav-links a { color: var(--text); text-decoration: none; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.08em; border-bottom: 2px solid transparent; transition: border-color 0.2s; }
+.nav-links a:hover { border-color: var(--accent); }
+
+/* HERO */
+.hero {
+  min-height: 100vh; display: flex; align-items: end;
+  padding: 120px 24px 80px;
+  position: relative;
+}
+.hero-content { max-width: 1200px; width: 100%; }
+.hero h1 {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(3rem, 12vw, 10rem);
+  font-weight: 700; line-height: 0.9;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+}
+.hero h1 .stroke {
+  -webkit-text-stroke: 2px var(--text);
+  color: transparent;
+}
+.hero h1 .accent { color: var(--accent); }
+.hero-sub {
+  margin-top: 32px; font-size: 1.2rem; color: var(--text-muted);
+  max-width: 500px; line-height: 1.6;
+  border-left: 4px solid var(--accent); padding-left: 20px;
+}
+.hero-tag {
+  position: absolute; top: 120px; right: 24px;
+  writing-mode: vertical-rl; text-orientation: mixed;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--text-muted);
+}
+
+/* BLOCKS */
+.block {
+  padding: 100px 24px;
+  border-top: 3px solid var(--border);
+}
+.block-alt { background: var(--bg-alt); }
+
+/* VALUE */
+.value-section {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; max-width: 1200px; margin: 0 auto;
+}
+.value-left {
+  border-right: 3px solid var(--border);
+  padding-right: 48px;
+}
+.value-left h2 {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(2rem, 5vw, 4rem);
+  text-transform: uppercase; line-height: 1;
+  letter-spacing: -0.02em;
+}
+.value-left h2 span { color: var(--accent-2); }
+.value-right { padding-left: 48px; display: flex; flex-direction: column; justify-content: center; gap: 32px; }
+.value-item { border-bottom: 1px solid var(--border); padding-bottom: 24px; }
+.value-item h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; }
+.value-item h3::before { content: '→ '; color: var(--accent); }
+.value-item p { color: var(--text-muted); line-height: 1.6; }
+
+/* BUSINESSES */
+.biz-section { max-width: 1200px; margin: 0 auto; }
+.biz-section h2 {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(1.8rem, 4vw, 3.5rem);
+  text-transform: uppercase; line-height: 1.1;
+  margin-bottom: 40px;
+}
+.biz-section h2 span { color: var(--accent-3); }
+.biz-marquee {
+  overflow: hidden; padding: 32px 0;
+  border-top: 2px solid var(--border);
+  border-bottom: 2px solid var(--border);
+}
+.biz-marquee-inner {
+  display: flex; gap: 48px; animation: marquee 20s linear infinite; white-space: nowrap;
+}
+.biz-marquee-inner span {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.5rem; text-transform: uppercase;
+  color: var(--text-muted);
+}
+.biz-marquee-inner span::after { content: ' •'; color: var(--accent); }
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.biz-text {
+  margin-top: 40px; font-size: 1.15rem; color: var(--text-muted);
+  max-width: 700px; line-height: 1.7;
+}
+
+/* STATS */
+.stats-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0; max-width: 1200px; margin: 0 auto;
+}
+.stat-box {
+  border: 2px solid var(--border); padding: 48px 32px;
+  transition: background 0.3s, border-color 0.3s;
+}
+.stat-box:hover { background: var(--accent); border-color: var(--accent); }
+.stat-box:hover * { color: var(--bg) !important; }
+.stat-box h2 {
+  font-family: 'Space Mono', monospace;
+  font-size: 3.5rem; font-weight: 700;
+}
+.stat-box p { color: var(--text-muted); margin-top: 8px; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.1em; }
+
+/* FORM */
+.form-block { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.form-left h2 {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  text-transform: uppercase; line-height: 1.05;
+}
+.form-left h2 span { color: var(--accent); }
+.form-left p { color: var(--text-muted); margin-top: 20px; line-height: 1.6; font-size: 1.1rem; }
+.form-right input, .form-right select {
+  width: 100%; padding: 16px 0; margin-bottom: 4px;
+  background: transparent; border: none; border-bottom: 2px solid var(--border);
+  color: var(--text); font-size: 1rem; font-family: inherit; outline: none;
+  transition: border-color 0.2s;
+}
+.form-right input:focus, .form-right select:focus { border-color: var(--accent); }
+.form-right input::placeholder { color: var(--text-muted); }
+.form-right select { appearance: none; cursor: pointer; }
+.form-right select option { background: var(--bg); }
+.submit-btn {
+  width: 100%; margin-top: 24px; padding: 18px;
+  background: var(--accent); color: var(--bg); border: none;
+  font-family: 'Space Mono', monospace; font-size: 1.1rem;
+  font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+  cursor: pointer; transition: background 0.2s;
+}
+.submit-btn:hover { background: var(--accent-2); }
+
+/* FOOTER */
+footer {
+  padding: 48px 24px; border-top: 3px solid var(--accent);
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+}
+footer .logo { font-size: 1.2rem; }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.footer-links a:hover { color: var(--text); }
+footer small { color: var(--text-muted); font-size: 0.8rem; width: 100%; text-align: center; margin-top: 16px; }
+
+@media (max-width: 768px) {
+  .value-section, .form-block { grid-template-columns: 1fr; }
+  .value-left { border-right: none; padding-right: 0; border-bottom: 3px solid var(--border); padding-bottom: 40px; margin-bottom: 40px; }
+  .value-right { padding-left: 0; }
+  .form-left { text-align: center; }
+  .hero-tag { display: none; }
+  .nav-links a:not(:last-child) { display: none; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">VIINTAS</a>
+  <div class="nav-links">
+    <a href="#producto">Producto</a>
+    <a href="#stats">Resultados</a>
+    <a href="#registro">Registro</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1><span class="stroke">IMPULSA</span><br><span class="accent">TU NEGOCIO</span><br>LOCAL.</h1>
+    <p class="hero-sub">Tecnología hecha a medida para negocios reales. Sin plantillas. Sin complicaciones. Solo resultados.</p>
+  </div>
+  <span class="hero-tag">Tecnología para LATAM — 2026</span>
+</section>
+
+<div class="block" id="producto">
+  <div class="value-section">
+    <div class="value-left">
+      <h2>NO ES OTRO<br>SOFTWARE<br><span>GENÉRICO.</span></h2>
+    </div>
+    <div class="value-right">
+      <div class="value-item">
+        <h3>Adaptado a tu operación</h3>
+        <p>Cada negocio tiene procesos únicos. Viintas se moldea a cómo trabajas, no al revés.</p>
+      </div>
+      <div class="value-item">
+        <h3>Adopción inmediata</h3>
+        <p>Diseñado para que cualquier equipo lo use desde el primer día. Cero curva de aprendizaje.</p>
+      </div>
+      <div class="value-item">
+        <h3>Impacto medible</h3>
+        <p>Métricas claras, eficiencia real, clientes más satisfechos. Eso es lo que entregamos.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="block block-alt">
+  <div class="biz-section">
+    <h2>SERVIMOS A<br><span>TODO TIPO</span><br>DE NEGOCIOS.</h2>
+    <div class="biz-marquee">
+      <div class="biz-marquee-inner">
+        <span>Tu negocio</span><span>Tu industria</span><span>Tu ciudad</span><span>Tu equipo</span><span>Tu operación</span><span>Tu crecimiento</span>
+        <span>Tu negocio</span><span>Tu industria</span><span>Tu ciudad</span><span>Tu equipo</span><span>Tu operación</span><span>Tu crecimiento</span>
+      </div>
+    </div>
+    <p class="biz-text">No importa qué tipo de negocio tengas. Nuestras soluciones tecnológicas se adaptan a las necesidades específicas de cada industria y cada operación. Una sola herramienta, infinitas configuraciones.</p>
+  </div>
+</div>
+
+<div class="block" id="stats">
+  <div class="stats-grid">
+    <div class="stat-box"><h2>500+</h2><p>Negocios impulsados</p></div>
+    <div class="stat-box"><h2>12</h2><p>Países</p></div>
+    <div class="stat-box"><h2>98%</h2><p>Retención</p></div>
+    <div class="stat-box"><h2>2M+</h2><p>Transacciones/mes</p></div>
+  </div>
+</div>
+
+<div class="block block-alt" id="registro">
+  <div class="form-block">
+    <div class="form-left">
+      <h2>¿LISTO PARA<br><span>IMPULSAR</span><br>TU NEGOCIO?</h2>
+      <p>Completa el formulario y te contactamos en menos de 24 horas para configurar tu solución.</p>
+    </div>
+    <div class="form-right">
+      <input type="text" placeholder="NOMBRE COMPLETO" required>
+      <input type="email" placeholder="EMAIL" required>
+      <input type="text" placeholder="NOMBRE DEL NEGOCIO" required>
+      <input type="tel" placeholder="TELÉFONO" required>
+      <select required>
+        <option value="" disabled selected>TIPO DE NEGOCIO</option>
+        <option>Comercio / Tienda</option>
+        <option>Servicios profesionales</option>
+        <option>Alimentos y bebidas</option>
+        <option>Salud y bienestar</option>
+        <option>Educación</option>
+        <option>Otro</option>
+      </select>
+      <button class="submit-btn">REGISTRARME →</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="#" class="logo">VIINTAS</a>
+  <div class="footer-links">
+    <a href="#">Producto</a>
+    <a href="#">Precios</a>
+    <a href="#">Contacto</a>
+    <a href="#">Legal</a>
+  </div>
+  <small>© 2026 Viintas. Todos los derechos reservados.</small>
+</footer>
+
+
+<script>
+
+window.__PALETTES = [
+  {name:"Original",desc:"Negro + naranja bold",vars:{"--bg-primary":"#000000","--bg-secondary":"#111111","--bg-card":"#0a0a0a","--text-primary":"#ffffff","--text-secondary":"#888888","--accent":"#ff4d00","--accent-hover":"#cc3d00","--border":"#333333","--form-bg":"#111111"}},
+  {name:"Acid Green",desc:"Negro + verde ácido",vars:{"--bg-primary":"#000000","--bg-secondary":"#0a0a0a","--bg-card":"#080808","--text-primary":"#ffffff","--text-secondary":"#888888","--accent":"#84cc16","--accent-hover":"#65a30d","--border":"#333333","--form-bg":"#111111"}},
+  {name:"Electric Blue",desc:"Negro puro + azul eléctrico",vars:{"--bg-primary":"#000000","--bg-secondary":"#080808","--bg-card":"#050505","--text-primary":"#ffffff","--text-secondary":"#888888","--accent":"#3b82f6","--accent-hover":"#2563eb","--border":"#333333","--form-bg":"#111111"}},
+  {name:"Hot Pink",desc:"Negro + rosa intenso",vars:{"--bg-primary":"#000000","--bg-secondary":"#0a0a0a","--bg-card":"#080808","--text-primary":"#ffffff","--text-secondary":"#888888","--accent":"#ec4899","--accent-hover":"#db2777","--border":"#333333","--form-bg":"#111111"}},
+  {name:"White Brutalist",desc:"Fondo blanco, texto negro",vars:{"--bg-primary":"#ffffff","--bg-secondary":"#f0f0f0","--bg-card":"#ffffff","--text-primary":"#000000","--text-secondary":"#555555","--accent":"#ff4d00","--accent-hover":"#cc3d00","--border":"#000000","--form-bg":"#f0f0f0"}},
+  {name:"Gold",desc:"Negro + dorado premium",vars:{"--bg-primary":"#000000","--bg-secondary":"#0a0800","--bg-card":"#0a0a08","--text-primary":"#ffffff","--text-secondary":"#888878","--accent":"#eab308","--accent-hover":"#ca8a04","--border":"#333322","--form-bg":"#111108"}}
+];
+</script>
+<script>
+// Palette switcher widget - inject into each landing page
+// Each page defines its own palettes in window.__PALETTES array
+(function(){
+  const palettes = window.__PALETTES || [];
+  if(!palettes.length) return;
+  
+  const root = document.documentElement;
+  let currentIdx = 0;
+  
+  // Create widget
+  const btn = document.createElement('div');
+  btn.innerHTML = '🎨';
+  Object.assign(btn.style, {position:'fixed',bottom:'24px',right:'24px',zIndex:'99999',width:'52px',height:'52px',borderRadius:'50%',background:'rgba(20,20,20,0.9)',border:'1px solid rgba(255,255,255,0.15)',cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'24px',boxShadow:'0 4px 24px rgba(0,0,0,0.5)',transition:'transform 0.2s',backdropFilter:'blur(12px)'});
+  btn.onmouseover=()=>btn.style.transform='scale(1.1)';
+  btn.onmouseout=()=>btn.style.transform='scale(1)';
+  
+  const panel = document.createElement('div');
+  panel.id = 'palette-panel';
+  Object.assign(panel.style, {position:'fixed',bottom:'88px',right:'24px',zIndex:'99999',width:'300px',background:'rgba(15,15,20,0.95)',border:'1px solid rgba(255,255,255,0.1)',borderRadius:'16px',padding:'0',boxShadow:'0 8px 40px rgba(0,0,0,0.6)',backdropFilter:'blur(16px)',fontFamily:'-apple-system,system-ui,sans-serif',overflow:'hidden',transform:'scale(0.9) translateY(10px)',opacity:'0',pointerEvents:'none',transition:'transform 0.25s ease, opacity 0.2s ease',maxHeight:'80vh',overflowY:'auto'});
+  
+  let open = false;
+  btn.onclick = () => {
+    open = !open;
+    panel.style.transform = open ? 'scale(1) translateY(0)' : 'scale(0.9) translateY(10px)';
+    panel.style.opacity = open ? '1' : '0';
+    panel.style.pointerEvents = open ? 'auto' : 'none';
+  };
+  
+  function applyPalette(idx) {
+    currentIdx = idx;
+    const p = palettes[idx];
+    Object.entries(p.vars).forEach(([k,v]) => root.style.setProperty(k, v));
+    renderPanel();
+  }
+  
+  function renderPanel() {
+    let html = `<div style="padding:14px 18px 10px;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center">
+      <span style="color:#fff;font-size:13px;font-weight:600;letter-spacing:0.03em">🎨 Paletas</span>
+      <button onclick="document.getElementById('palette-panel').querySelector('[data-copy]').click()" style="padding:4px 12px;font-size:11px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:6px;color:#aaa;cursor:pointer;font-family:inherit">📋 Copiar CSS</button>
+    </div><div style="padding:12px 14px">`;
+    
+    palettes.forEach((p, i) => {
+      const active = i === currentIdx;
+      const colors = Object.values(p.vars).slice(0, 5);
+      html += `<div onclick="window.__applyPalette(${i})" style="display:flex;align-items:center;gap:12px;padding:10px 12px;margin-bottom:8px;border-radius:10px;cursor:pointer;border:2px solid ${active ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.05)'};background:${active ? 'rgba(255,255,255,0.06)' : 'transparent'};transition:all 0.2s">
+        <div style="display:flex;gap:4px;flex-shrink:0">
+          ${colors.map(c => `<div style="width:22px;height:22px;border-radius:50%;background:${c};border:1px solid rgba(255,255,255,0.1)"></div>`).join('')}
+        </div>
+        <div>
+          <div style="color:#fff;font-size:12px;font-weight:600">${p.name}</div>
+          <div style="color:#666;font-size:10px">${p.desc || ''}</div>
+        </div>
+      </div>`;
+    });
+    
+    html += `</div><button data-copy style="display:none"></button>`;
+    panel.innerHTML = html;
+    panel.querySelector('[data-copy]').onclick = () => {
+      let css = ':root {\n';
+      Object.entries(palettes[currentIdx].vars).forEach(([k,v]) => { css += `  ${k}: ${v};\n`; });
+      css += '}';
+      navigator.clipboard.writeText(css).then(() => {
+        const b = panel.querySelector('button:not([data-copy])');
+        if(b){b.textContent='✓ Copiado';setTimeout(()=>b.textContent='📋 Copiar CSS',1500);}
+      });
+    };
+  }
+  
+  window.__applyPalette = applyPalette;
+  renderPanel();
+  document.body.appendChild(panel);
+  document.body.appendChild(btn);
+})();
+
+</script>
+
+</body>
+</html>

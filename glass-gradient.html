@@ -2,7 +2,6 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Viintas — Soluciones tecnológicas a la medida</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -337,7 +336,6 @@ footer small { color: #444; font-size: 0.8rem; }
       <a href="#servicios">Servicios</a>
       <a href="#como">Proceso</a>
       <a href="#casos">Casos</a>
-      <a href="/portfolio.html">Portafolio</a>
       <a href="#registro" class="nav-cta">Hablemos</a>
     </div>
   </div>
@@ -515,51 +513,42 @@ footer small { color: #444; font-size: 0.8rem; }
         </div>
       </div>
       <div class="glass form-card fade-up">
-        <h3 id="form-title">Hablemos de tu proyecto</h3>
-        <form id="contact-form" name="contacto" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-          <input type="hidden" name="form-name" value="contacto">
-          <p style="display:none"><label>No llenar: <input name="bot-field"></label></p>
-          <div class="form-row">
-            <label>Nombre</label>
-            <input type="text" name="nombre" placeholder="Tu nombre completo" required>
-          </div>
-          <div class="form-row">
-            <label>Correo electrónico</label>
-            <input type="email" name="email" placeholder="correo@tunegocio.com" required>
-          </div>
-          <div class="form-row">
-            <label>Negocio</label>
-            <input type="text" name="negocio" placeholder="Nombre de tu negocio" required>
-          </div>
-          <div class="form-row">
-            <label>Teléfono</label>
-            <input type="tel" name="telefono" placeholder="+57 300 000 0000" required>
-          </div>
-          <div class="form-row">
-            <label>Tipo de negocio</label>
-            <select name="tipo" required>
-              <option value="" disabled selected>Selecciona una opción</option>
-              <option>Restaurantes y alimentos</option>
-              <option>Retail y comercio</option>
-              <option>Deportes y entretenimiento</option>
-              <option>Servicios profesionales</option>
-              <option>Salud y bienestar</option>
-              <option>Logística y operaciones</option>
-              <option>Otro</option>
-            </select>
-          </div>
-          <div class="form-row">
-            <label>Cuéntanos brevemente qué necesitas</label>
-            <input type="text" name="descripcion" placeholder="Ej: Sistema de gestión para 8 sucursales de restaurante">
-          </div>
-          <button type="submit" class="form-submit">Agendar reunión</button>
-          <p class="form-note">Sin compromiso. Respondemos en menos de 24 horas.</p>
-        </form>
-        <div id="form-success" style="display:none;text-align:center;padding:40px 20px">
-          <div style="font-size:2.5rem;margin-bottom:16px">&#10003;</div>
-          <h3 style="font-size:1.3rem;margin-bottom:12px">Mensaje recibido</h3>
-          <p style="color:var(--text-muted);line-height:1.6">Te contactaremos en menos de 24 horas para agendar una reunión y entender tu proyecto a fondo.</p>
+        <h3>Hablemos de tu proyecto</h3>
+        <div class="form-row">
+          <label>Nombre</label>
+          <input type="text" placeholder="Tu nombre completo" required>
         </div>
+        <div class="form-row">
+          <label>Correo electrónico</label>
+          <input type="email" placeholder="correo@tunegocio.com" required>
+        </div>
+        <div class="form-row">
+          <label>Negocio</label>
+          <input type="text" placeholder="Nombre de tu negocio" required>
+        </div>
+        <div class="form-row">
+          <label>Teléfono</label>
+          <input type="tel" placeholder="+57 300 000 0000" required>
+        </div>
+        <div class="form-row">
+          <label>Tipo de negocio</label>
+          <select required>
+            <option value="" disabled selected>Selecciona una opción</option>
+            <option>Restaurantes y alimentos</option>
+            <option>Retail y comercio</option>
+            <option>Deportes y entretenimiento</option>
+            <option>Servicios profesionales</option>
+            <option>Salud y bienestar</option>
+            <option>Logística y operaciones</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Cuéntanos brevemente qué necesitas</label>
+          <input type="text" placeholder="Ej: Sistema de gestión para 8 sucursales de restaurante">
+        </div>
+        <button class="form-submit">Agendar reunión</button>
+        <p class="form-note">Sin compromiso. Respondemos en menos de 24 horas.</p>
       </div>
     </div>
   </div>
@@ -581,105 +570,49 @@ const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
 document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
 
-// Form submission → Supabase CRM
-const SUPABASE_URL = 'https://ivylcrxmrolrwxbcijqe.supabase.co';
-const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml2eWxjcnhtcm9scnd4YmNpanFlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxNTE4NDIsImV4cCI6MjA4NzcyNzg0Mn0.1-5Nsl6SkLF7Z7cRxeQ66koWldfLn3l7ju1rnEenO58';
-
-// Anti-bot: track when form became visible
-let formLoadTime = Date.now();
-
-// Detect gibberish strings (high consonant ratio, no real words)
-function looksLikeGibberish(str) {
-  if (!str || str.length < 3) return false;
-  const clean = str.replace(/[^a-zA-ZáéíóúñÁÉÍÓÚÑ]/g, '');
-  if (clean.length < 3) return false;
-  // Count consecutive consonants (3+ in a row = suspicious)
-  const chunks = clean.toLowerCase().split(/[aeiouáéíóú]+/);
-  const longConsonantRuns = chunks.filter(c => c.length >= 4).length;
-  if (longConsonantRuns >= 2) return true;
-  // Ratio check: if >70% consonants, likely gibberish
-  const vowels = (clean.match(/[aeiouáéíóú]/gi) || []).length;
-  if (clean.length > 6 && vowels / clean.length < 0.2) return true;
-  // Mixed case chaos (e.g. "LsZQOzltiqIcYXtGB")
-  if (clean.length > 8) {
-    const caseChanges = clean.split('').filter((c,i) => i > 0 && ((c === c.toUpperCase() && clean[i-1] === clean[i-1].toLowerCase()) || (c === c.toLowerCase() && clean[i-1] === clean[i-1].toUpperCase()))).length;
-    if (caseChanges / clean.length > 0.4) return true;
+<script>
+window.__PALETTES = [
+  {name:"Índigo / Cyan",desc:"La original — tech premium",vars:{"--bg":"#0c0c1d","--bg-card":"rgba(255,255,255,0.04)","--bg-card-border":"rgba(255,255,255,0.08)","--text":"#ffffff","--text-muted":"#8a8aa0","--gradient-1":"#7c3aed","--gradient-2":"#2563eb","--gradient-3":"#06b6d4","--gradient-4":"#8b5cf6","--accent":"#818cf8","--accent-hover":"#6366f1","--form-bg":"rgba(255,255,255,0.05)","--form-border":"rgba(255,255,255,0.1)"}},
+  {name:"Esmeralda",desc:"Verde profundo — confianza",vars:{"--bg":"#060e0c","--bg-card":"rgba(255,255,255,0.04)","--bg-card-border":"rgba(255,255,255,0.08)","--text":"#f0f0f0","--text-muted":"#7a9a8a","--gradient-1":"#059669","--gradient-2":"#0d9488","--gradient-3":"#06b6d4","--gradient-4":"#10b981","--accent":"#34d399","--accent-hover":"#10b981","--form-bg":"rgba(255,255,255,0.05)","--form-border":"rgba(255,255,255,0.1)"}},
+  {name:"Coral",desc:"Cálido — energía y cercanía",vars:{"--bg":"#120808","--bg-card":"rgba(255,255,255,0.04)","--bg-card-border":"rgba(255,255,255,0.08)","--text":"#fff5f0","--text-muted":"#aa8a80","--gradient-1":"#f97316","--gradient-2":"#ef4444","--gradient-3":"#ec4899","--gradient-4":"#f59e0b","--accent":"#fb923c","--accent-hover":"#f97316","--form-bg":"rgba(255,255,255,0.05)","--form-border":"rgba(255,255,255,0.1)"}},
+  {name:"Púrpura Real",desc:"Bold — premium y diferente",vars:{"--bg":"#0a0510","--bg-card":"rgba(255,255,255,0.04)","--bg-card-border":"rgba(255,255,255,0.08)","--text":"#f5f0ff","--text-muted":"#8a7aaa","--gradient-1":"#a855f7","--gradient-2":"#7c3aed","--gradient-3":"#ec4899","--gradient-4":"#c084fc","--accent":"#c084fc","--accent-hover":"#a855f7","--form-bg":"rgba(255,255,255,0.05)","--form-border":"rgba(255,255,255,0.1)"}},
+  {name:"Monocromático",desc:"Elegante — sin distracciones",vars:{"--bg":"#0a0a0a","--bg-card":"rgba(255,255,255,0.03)","--bg-card-border":"rgba(255,255,255,0.06)","--text":"#e8e8e8","--text-muted":"#777777","--gradient-1":"#888888","--gradient-2":"#666666","--gradient-3":"#aaaaaa","--gradient-4":"#999999","--accent":"#cccccc","--accent-hover":"#aaaaaa","--form-bg":"rgba(255,255,255,0.04)","--form-border":"rgba(255,255,255,0.08)"}},
+  {name:"Light",desc:"Modo claro — accesible",vars:{"--bg":"#f8f8fc","--bg-card":"rgba(0,0,0,0.03)","--bg-card-border":"rgba(0,0,0,0.08)","--text":"#111122","--text-muted":"#555566","--gradient-1":"#6d28d9","--gradient-2":"#2563eb","--gradient-3":"#0891b2","--gradient-4":"#7c3aed","--accent":"#6366f1","--accent-hover":"#4f46e5","--form-bg":"rgba(0,0,0,0.03)","--form-border":"rgba(0,0,0,0.1)"}}
+];
+</script>
+<script>
+(function(){
+  const palettes = window.__PALETTES || [];
+  if(!palettes.length) return;
+  const root = document.documentElement;
+  let currentIdx = 0;
+  const btn = document.createElement('div');
+  btn.innerHTML = '&#x1f3a8;';
+  Object.assign(btn.style, {position:'fixed',bottom:'24px',right:'24px',zIndex:'99999',width:'52px',height:'52px',borderRadius:'50%',background:'rgba(20,20,20,0.9)',border:'1px solid rgba(255,255,255,0.15)',cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'24px',boxShadow:'0 4px 24px rgba(0,0,0,0.5)',transition:'transform 0.2s',backdropFilter:'blur(12px)'});
+  btn.onmouseover=()=>btn.style.transform='scale(1.1)';
+  btn.onmouseout=()=>btn.style.transform='scale(1)';
+  const panel = document.createElement('div');
+  panel.id = 'palette-panel';
+  Object.assign(panel.style, {position:'fixed',bottom:'88px',right:'24px',zIndex:'99999',width:'300px',background:'rgba(15,15,20,0.95)',border:'1px solid rgba(255,255,255,0.1)',borderRadius:'16px',padding:'0',boxShadow:'0 8px 40px rgba(0,0,0,0.6)',backdropFilter:'blur(16px)',fontFamily:'-apple-system,system-ui,sans-serif',overflow:'hidden',transform:'scale(0.9) translateY(10px)',opacity:'0',pointerEvents:'none',transition:'transform 0.25s ease, opacity 0.2s ease',maxHeight:'80vh',overflowY:'auto'});
+  let open = false;
+  btn.onclick = () => { open = !open; panel.style.transform = open ? 'scale(1) translateY(0)' : 'scale(0.9) translateY(10px)'; panel.style.opacity = open ? '1' : '0'; panel.style.pointerEvents = open ? 'auto' : 'none'; };
+  function applyPalette(idx) { currentIdx = idx; const p = palettes[idx]; Object.entries(p.vars).forEach(([k,v]) => root.style.setProperty(k, v)); renderPanel(); }
+  function renderPanel() {
+    let html = '<div style="padding:14px 18px 10px;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center"><span style="color:#fff;font-size:13px;font-weight:600;letter-spacing:0.03em">Paletas</span><button onclick="document.getElementById(\'palette-panel\').querySelector(\'[data-copy]\').click()" style="padding:4px 12px;font-size:11px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:6px;color:#aaa;cursor:pointer;font-family:inherit">Copiar CSS</button></div><div style="padding:12px 14px">';
+    palettes.forEach((p, i) => { const active = i === currentIdx; const colors = Object.values(p.vars).filter(v=>v.startsWith('#')).slice(0, 5);
+      html += '<div onclick="window.__applyPalette('+i+')" style="display:flex;align-items:center;gap:12px;padding:10px 12px;margin-bottom:8px;border-radius:10px;cursor:pointer;border:2px solid '+(active?'rgba(255,255,255,0.3)':'rgba(255,255,255,0.05)')+';background:'+(active?'rgba(255,255,255,0.06)':'transparent')+';transition:all 0.2s"><div style="display:flex;gap:4px;flex-shrink:0">'+colors.map(c=>'<div style="width:22px;height:22px;border-radius:50%;background:'+c+';border:1px solid rgba(255,255,255,0.1)"></div>').join('')+'</div><div><div style="color:#fff;font-size:12px;font-weight:600">'+p.name+'</div><div style="color:#666;font-size:10px">'+(p.desc||'')+'</div></div></div>';
+    });
+    html += '</div><button data-copy style="display:none"></button>';
+    panel.innerHTML = html;
+    panel.querySelector('[data-copy]').onclick = () => { let css = ':root {\\n'; Object.entries(palettes[currentIdx].vars).forEach(([k,v]) => { css += '  '+k+': '+v+';\\n'; }); css += '}'; navigator.clipboard.writeText(css); };
   }
-  return false;
-}
-
-document.getElementById('contact-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const form = e.target;
-  const fd = new FormData(form);
-  const btn = form.querySelector('.form-submit');
-
-  // Anti-bot check 1: honeypot field
-  if (fd.get('bot-field')) {
-    form.style.display = 'none';
-    document.getElementById('form-title').style.display = 'none';
-    document.getElementById('form-success').style.display = 'block';
-    return;
-  }
-
-  // Anti-bot check 2: too fast (<3 seconds)
-  if (Date.now() - formLoadTime < 3000) {
-    form.style.display = 'none';
-    document.getElementById('form-title').style.display = 'none';
-    document.getElementById('form-success').style.display = 'block';
-    return;
-  }
-
-  // Anti-bot check 3: gibberish detection
-  if (looksLikeGibberish(fd.get('nombre')) || looksLikeGibberish(fd.get('negocio')) || looksLikeGibberish(fd.get('descripcion'))) {
-    form.style.display = 'none';
-    document.getElementById('form-title').style.display = 'none';
-    document.getElementById('form-success').style.display = 'block';
-    return;
-  }
-
-  btn.textContent = 'Enviando...';
-  btn.disabled = true;
-
-  const lead = {
-    business_name: fd.get('negocio'),
-    contact_name: fd.get('nombre'),
-    email: fd.get('email'),
-    phone: fd.get('telefono'),
-    business_type: fd.get('tipo'),
-    description: fd.get('descripcion') || null,
-    vertical: fd.get('tipo') || 'general',
-    source: 'inbound',
-    stage: 'qualified',
-    notes: 'Lead desde viintas.com landing page',
-    tags: ['landing-page', 'viintas.com']
-  };
-
-  fetch(SUPABASE_URL + '/rest/v1/leads', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'apikey': SUPABASE_ANON,
-      'Authorization': 'Bearer ' + SUPABASE_ANON,
-      'Prefer': 'return=minimal'
-    },
-    body: JSON.stringify(lead)
-  })
-  .then(r => {
-    if (!r.ok) throw new Error(r.status);
-    form.style.display = 'none';
-    document.getElementById('form-title').style.display = 'none';
-    document.getElementById('form-success').style.display = 'block';
-  })
-  .catch(() => {
-    // Show success anyway (don't block the user), log error
-    form.style.display = 'none';
-    document.getElementById('form-title').style.display = 'none';
-    document.getElementById('form-success').style.display = 'block';
-    console.error('Error saving lead to CRM');
-  });
-});
+  window.__applyPalette = applyPalette;
+  renderPanel();
+  document.body.appendChild(panel);
+  document.body.appendChild(btn);
+})();
 </script>
 
 </body>

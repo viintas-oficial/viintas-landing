@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portafolio — Viintas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0c0c1d;
+  --bg-card: rgba(255,255,255,0.04);
+  --bg-card-border: rgba(255,255,255,0.08);
+  --text: #ffffff;
+  --text-muted: #8a8aa0;
+  --gradient-1: #7c3aed;
+  --gradient-2: #2563eb;
+  --gradient-3: #06b6d4;
+  --gradient-4: #8b5cf6;
+  --accent: #818cf8;
+  --accent-hover: #6366f1;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--bg); color: var(--text);
+  overflow-x: hidden; -webkit-font-smoothing: antialiased;
+}
+
+/* BG */
+.bg-blob {
+  position: fixed; border-radius: 50%; filter: blur(140px); opacity: 0.25; pointer-events: none; z-index: 0;
+}
+.blob-1 { width: 600px; height: 600px; background: var(--gradient-1); top: -200px; left: -200px; }
+.blob-2 { width: 500px; height: 500px; background: var(--gradient-3); bottom: -100px; right: -200px; }
+.blob-3 { width: 350px; height: 350px; background: var(--gradient-2); top: 60%; left: 40%; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 16px 0;
+  background: rgba(12,12,29,0.5);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.nav-inner {
+  max-width: 1120px; margin: 0 auto; padding: 0 24px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.logo { font-weight: 800; font-size: 1.15rem; letter-spacing: 0.1em; color: var(--text); text-decoration: none; }
+.nav-links { display: flex; align-items: center; gap: 32px; }
+.nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+
+/* HERO */
+.hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding-top: 80px; }
+.hero-content { max-width: 800px; text-align: center; }
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px; border-radius: 6px;
+  background: rgba(129,140,248,0.1); border: 1px solid rgba(129,140,248,0.15);
+  color: var(--accent); font-size: 0.8rem; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 28px;
+}
+.hero h1 {
+  font-size: clamp(2.8rem, 6vw, 4.2rem); font-weight: 800;
+  line-height: 1.08; letter-spacing: -0.03em; margin-bottom: 16px;
+}
+.hero p {
+  font-size: 1.15rem; color: var(--text-muted);
+  max-width: 540px; line-height: 1.75; font-weight: 400; margin: 0 auto 24px;
+}
+
+/* PORTFOLIO GRID */
+.portfolio-section { padding: 80px 0 120px; }
+.container { max-width: 1120px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+.portfolio-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 48px;
+}
+.portfolio-card {
+  background: var(--bg-card);
+  border: 1px solid var(--bg-card-border);
+  border-radius: 16px; overflow: hidden;
+  transition: all 0.3s; text-decoration: none; color: inherit;
+  display: flex; flex-direction: column;
+}
+.portfolio-card:hover {
+  border-color: rgba(129,140,248,0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+}
+.portfolio-img {
+  height: 180px; display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.portfolio-icon { font-size: 3.5rem; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3)); }
+.portfolio-body { padding: 28px; flex: 1; display: flex; flex-direction: column; }
+.portfolio-body h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
+.portfolio-body p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; flex: 1; }
+.portfolio-link {
+  display: inline-block; margin-top: 16px;
+  color: var(--accent); font-size: 0.85rem; font-weight: 600;
+  transition: color 0.2s;
+}
+.portfolio-card:hover .portfolio-link { color: var(--accent-hover); }
+.portfolio-soon { cursor: default; opacity: 0.65; }
+.portfolio-soon:hover { transform: none; border-color: var(--bg-card-border); box-shadow: none; }
+.portfolio-soon-badge {
+  display: inline-block; margin-top: 16px;
+  padding: 5px 14px; border-radius: 6px;
+  background: rgba(129,140,248,0.1); border: 1px solid rgba(129,140,248,0.15);
+  color: var(--accent); font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+/* FOOTER */
+footer {
+  padding: 48px 24px; text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  position: relative; z-index: 1;
+}
+.footer-inner {
+  max-width: 1120px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+.footer-links a:hover { color: var(--text); }
+footer small { color: #444; font-size: 0.8rem; }
+
+/* FADE */
+.fade-up { opacity: 0; transform: translateY(24px); transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.5rem; }
+  .portfolio-grid { grid-template-columns: 1fr; }
+  .nav-links a:not(.nav-cta) { display: none; }
+  .footer-inner { flex-direction: column; gap: 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-blob blob-1"></div>
+<div class="bg-blob blob-2"></div>
+<div class="bg-blob blob-3"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">VIINTAS</a>
+    <div class="nav-links">
+      <a href="/">Inicio</a>
+      <a href="/#servicios">Servicios</a>
+      <a href="/#proceso">Proceso</a>
+      <a href="/#casos">Casos</a>
+      <a href="/portfolio.html" style="color: var(--text);">Portafolio</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container hero-content fade-up">
+    <div class="hero-tag">Portafolio</div>
+    <h1>Menús digitales en operación</h1>
+    <p>Restaurantes y negocios que ya usan nuestras soluciones TuMenú para ofrecer una experiencia digital a sus clientes.</p>
+  </div>
+</section>
+
+<section class="portfolio-section">
+  <div class="container">
+    <div class="portfolio-grid">
+      <a href="https://tumenu.viintas.com/rancho-in" target="_blank" rel="noopener" class="portfolio-card fade-up">
+        <div class="portfolio-img" style="background:linear-gradient(135deg,rgba(234,88,12,0.25),rgba(220,38,38,0.15))">
+          <div class="portfolio-icon">🥩</div>
+        </div>
+        <div class="portfolio-body">
+          <h3>Rancho In</h3>
+          <p>Restaurante parrilla con menú digital interactivo y gestión de pedidos.</p>
+          <span class="portfolio-link">tumenu.viintas.com/rancho-in →</span>
+        </div>
+      </a>
+      <a href="https://tumenu.viintas.com/sorbettiko" target="_blank" rel="noopener" class="portfolio-card fade-up">
+        <div class="portfolio-img" style="background:linear-gradient(135deg,rgba(234,179,8,0.25),rgba(234,88,12,0.15))">
+          <div class="portfolio-icon">🍕</div>
+        </div>
+        <div class="portfolio-body">
+          <h3>El Sorbettiko</h3>
+          <p>Cadena de restaurantes con menú digital, promociones y experiencia de pedido online.</p>
+          <span class="portfolio-link">tumenu.viintas.com/sorbettiko →</span>
+        </div>
+      </a>
+      <a href="https://tumenu.viintas.com/brasa-gourmet" target="_blank" rel="noopener" class="portfolio-card fade-up">
+        <div class="portfolio-img" style="background:linear-gradient(135deg,rgba(220,38,38,0.25),rgba(190,18,60,0.15))">
+          <div class="portfolio-icon">🔥</div>
+        </div>
+        <div class="portfolio-body">
+          <h3>Brasa Gourmet</h3>
+          <p>Restaurante gourmet con carta digital, reservas y sistema de recomendaciones.</p>
+          <span class="portfolio-link">tumenu.viintas.com/brasa-gourmet →</span>
+        </div>
+      </a>
+      <div class="portfolio-card portfolio-soon fade-up">
+        <div class="portfolio-img" style="background:linear-gradient(135deg,rgba(100,116,139,0.2),rgba(71,85,105,0.1))">
+          <div class="portfolio-icon">🍽️</div>
+        </div>
+        <div class="portfolio-body">
+          <h3>Los Labriegos</h3>
+          <p>Restaurante tradicional colombiano — próximamente con menú digital TuMenú.</p>
+          <span class="portfolio-soon-badge">En configuración</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <small>© 2026 Viintas. Todos los derechos reservados.</small>
+    <div class="footer-links">
+      <a href="/">Volver al inicio</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>

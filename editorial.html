@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Viintas — La revolución silenciosa del negocio local</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* === COLOR SYSTEM — swap to retheme === */
+  --bg: #111111;               /* Base bg */
+  --bg-alt: #181818;           /* Alternate bg */
+  --bg-warm: #1a1614;          /* Warm tinted bg */
+  --text: #eeeeee;             /* Primary text */
+  --text-muted: #888888;       /* Muted */
+  --text-dim: #555555;         /* Very muted */
+  --accent: #d4a574;           /* Warm gold accent */
+  --accent-hover: #c4905a;     /* Accent hover */
+  --accent-2: #e8c9a0;         /* Light gold */
+  --border: #2a2a2a;           /* Borders */
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'Inter', -apple-system, sans-serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans); background: var(--bg); color: var(--text);
+  -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(17,17,17,0.9); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 40px; display: flex; justify-content: space-between; align-items: center;
+}
+.logo { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; color: var(--accent); text-decoration: none; font-style: italic; }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.05em; transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+
+/* HERO — editorial spread */
+.hero {
+  min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
+  padding-top: 80px;
+}
+.hero-left {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 80px 60px 80px 40px; border-right: 1px solid var(--border);
+}
+.hero-category {
+  font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em;
+  color: var(--accent); margin-bottom: 32px; font-weight: 500;
+}
+.hero h1 {
+  font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 900; line-height: 1.1; letter-spacing: -0.01em;
+}
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero-right {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 80px 40px 80px 60px; background: var(--bg-warm);
+}
+.hero-deck {
+  font-family: var(--serif); font-size: 1.5rem; font-weight: 400;
+  line-height: 1.6; color: var(--text-muted); font-style: italic;
+}
+.hero-byline { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); }
+.hero-byline span { color: var(--text-dim); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; }
+
+/* BODY TEXT */
+.editorial-body {
+  max-width: 720px; margin: 0 auto; padding: 100px 24px;
+}
+.dropcap::first-letter {
+  font-family: var(--serif); font-size: 4.5rem; float: left;
+  line-height: 0.8; padding-right: 12px; padding-top: 6px;
+  color: var(--accent); font-weight: 700;
+}
+.editorial-body p {
+  font-size: 1.15rem; line-height: 1.9; color: var(--text-muted);
+  margin-bottom: 28px;
+}
+.editorial-body p strong { color: var(--text); font-weight: 600; }
+
+/* PULL QUOTE */
+.pull-quote {
+  padding: 80px 40px; background: var(--bg-alt);
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+.pull-quote blockquote {
+  font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 3rem);
+  font-style: italic; line-height: 1.4; max-width: 800px; margin: 0 auto;
+  color: var(--accent-2);
+}
+.pull-quote cite { display: block; margin-top: 24px; color: var(--text-dim); font-size: 0.85rem; font-style: normal; text-transform: uppercase; letter-spacing: 0.15em; }
+
+/* STATS — editorial sidebar style */
+.stats-section {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--border);
+}
+.stat-col {
+  padding: 60px 32px; text-align: center;
+  border-right: 1px solid var(--border);
+}
+.stat-col:last-child { border-right: none; }
+.stat-col h2 {
+  font-family: var(--serif); font-size: 3rem; font-weight: 700; color: var(--accent);
+}
+.stat-col p { color: var(--text-muted); margin-top: 8px; font-size: 0.9rem; }
+
+/* BUSINESS SECTION */
+.biz-editorial {
+  display: grid; grid-template-columns: 1fr 1fr;
+  min-height: 60vh;
+}
+.biz-left {
+  background: var(--bg-warm); padding: 80px 60px;
+  display: flex; flex-direction: column; justify-content: center;
+  border-right: 1px solid var(--border);
+}
+.biz-left h2 {
+  font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 900; line-height: 1.15;
+}
+.biz-left h2 em { font-style: italic; color: var(--accent); }
+.biz-right {
+  padding: 80px 60px; display: flex; align-items: center;
+}
+.biz-right p { font-size: 1.15rem; line-height: 1.9; color: var(--text-muted); }
+
+/* FORM */
+.form-section {
+  padding: 100px 24px; background: var(--bg-alt);
+  border-top: 1px solid var(--border);
+}
+.form-inner {
+  max-width: 520px; margin: 0 auto; text-align: center;
+}
+.form-inner h2 {
+  font-family: var(--serif); font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700; font-style: italic;
+}
+.form-inner h2 span { color: var(--accent); }
+.form-inner > p { color: var(--text-muted); margin: 16px 0 40px; line-height: 1.6; }
+.form-inner input, .form-inner select {
+  width: 100%; padding: 16px 0; margin-bottom: 8px;
+  background: transparent; border: none; border-bottom: 1px solid var(--border);
+  color: var(--text); font-size: 1rem; font-family: var(--sans); outline: none;
+  transition: border-color 0.3s;
+}
+.form-inner input:focus, .form-inner select:focus { border-color: var(--accent); }
+.form-inner input::placeholder { color: var(--text-dim); }
+.form-inner select { appearance: none; cursor: pointer; }
+.form-inner select option { background: var(--bg-alt); }
+.form-btn {
+  margin-top: 32px; width: 100%; padding: 16px;
+  background: var(--accent); color: var(--bg); border: none;
+  font-family: var(--serif); font-size: 1.1rem; font-weight: 700;
+  font-style: italic; cursor: pointer; transition: background 0.2s;
+  letter-spacing: 0.02em;
+}
+.form-btn:hover { background: var(--accent-hover); }
+
+/* FOOTER */
+footer {
+  padding: 48px 40px; border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+}
+footer .logo { font-size: 1.2rem; }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { color: var(--text-dim); text-decoration: none; font-size: 0.85rem; }
+.footer-links a:hover { color: var(--text); }
+footer small { width: 100%; text-align: center; color: var(--text-dim); margin-top: 16px; font-size: 0.8rem; }
+
+/* FADE */
+.fade-in { opacity: 0; transform: translateY(24px); transition: all 0.7s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 768px) {
+  .hero, .biz-editorial { grid-template-columns: 1fr; }
+  .hero-left { border-right: none; border-bottom: 1px solid var(--border); padding: 100px 24px 48px; }
+  .hero-right { padding: 48px 24px; }
+  .biz-left { border-right: none; padding: 60px 24px; }
+  .biz-right { padding: 48px 24px; }
+  .stats-section { grid-template-columns: 1fr 1fr; }
+  .stat-col:nth-child(2) { border-right: none; }
+  .stat-col:nth-child(1), .stat-col:nth-child(2) { border-bottom: 1px solid var(--border); }
+  nav { padding: 14px 20px; }
+  .nav-links a:not(:last-child) { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">Viintas</a>
+  <div class="nav-links">
+    <a href="#historia">Historia</a>
+    <a href="#datos">Datos</a>
+    <a href="#registro">Registrarse</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-left fade-in">
+    <span class="hero-category">Tecnología & Negocios Locales</span>
+    <h1>La revolución silenciosa del <em>negocio local</em></h1>
+  </div>
+  <div class="hero-right fade-in">
+    <p class="hero-deck">Mientras las grandes empresas acumulan herramientas digitales, millones de negocios locales en Latinoamérica operan con papel, WhatsApp y buena voluntad. Viintas llegó para cambiar eso.</p>
+    <div class="hero-byline">
+      <span>Viintas — Soluciones tecnológicas · 2026</span>
+    </div>
+  </div>
+</section>
+
+<div class="editorial-body fade-in" id="historia">
+  <p class="dropcap">Hay una brecha invisible que separa a los negocios que crecen de los que sobreviven. No es talento, ni esfuerzo, ni ubicación. Es tecnología. Pero no cualquier tecnología — sino la que realmente entiende cómo funciona cada negocio.</p>
+  <p><strong>Viintas nació de una premisa simple:</strong> cada negocio local merece herramientas digitales diseñadas específicamente para su operación. No adaptaciones de software empresarial. No plantillas genéricas. Soluciones que se sienten como si las hubiera construido un ingeniero que conoce tu negocio por dentro.</p>
+  <p>El resultado es una solución que se moldea a cada tipo de negocio, automatizando lo tedioso, simplificando lo complejo, y liberando tiempo para lo que realmente importa: atender a tus clientes.</p>
+</div>
+
+<div class="pull-quote">
+  <blockquote class="fade-in">"La mejor tecnología es la que desaparece. La que simplemente funciona y te deja trabajar."</blockquote>
+  <cite>— Filosofía Viintas</cite>
+</div>
+
+<div class="biz-editorial">
+  <div class="biz-left fade-in">
+    <h2>Cada negocio es un <em>mundo diferente</em></h2>
+  </div>
+  <div class="biz-right fade-in">
+    <p>No importa a qué te dediques. Las soluciones de Viintas se configuran para las necesidades específicas de tu industria. Porque entendemos que un negocio no es igual a otro — y tu tecnología tampoco debería serlo. Servimos a cientos de tipos de negocios diferentes en toda Latinoamérica.</p>
+  </div>
+</div>
+
+<div class="stats-section" id="datos">
+  <div class="stat-col fade-in"><h2>500+</h2><p>Negocios transformados</p></div>
+  <div class="stat-col fade-in"><h2>12</h2><p>Países</p></div>
+  <div class="stat-col fade-in"><h2>98%</h2><p>Retención</p></div>
+  <div class="stat-col fade-in"><h2>2M+</h2><p>Transacciones/mes</p></div>
+</div>
+
+<div class="form-section" id="registro">
+  <div class="form-inner fade-in">
+    <h2>Comienza tu <span>transformación</span></h2>
+    <p>Déjanos tus datos y te contactamos para diseñar la solución perfecta para tu negocio.</p>
+    <input type="text" placeholder="Tu nombre" required>
+    <input type="email" placeholder="Correo electrónico" required>
+    <input type="text" placeholder="Nombre de tu negocio" required>
+    <input type="tel" placeholder="Teléfono" required>
+    <select required>
+      <option value="" disabled selected>Tipo de negocio</option>
+      <option>Comercio / Tienda</option>
+      <option>Servicios profesionales</option>
+      <option>Alimentos y bebidas</option>
+      <option>Salud y bienestar</option>
+      <option>Educación</option>
+      <option>Otro</option>
+    </select>
+    <button class="form-btn">Comenzar ahora →</button>
+  </div>
+</div>
+
+<footer>
+  <a href="#" class="logo">Viintas</a>
+  <div class="footer-links">
+    <a href="#">Producto</a>
+    <a href="#">Precios</a>
+    <a href="#">Contacto</a>
+    <a href="#">Privacidad</a>
+  </div>
+  <small>© 2026 Viintas. Todos los derechos reservados.</small>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+
+
+<script>
+
+window.__PALETTES = [
+  {name:"Original",desc:"Dark + dorado editorial",vars:{"--bg-primary":"#0c0c0c","--bg-secondary":"#141414","--bg-card":"#1a1a1a","--text-primary":"#eeeeee","--text-secondary":"#888888","--accent":"#c9a84c","--accent-hover":"#b8922e","--border":"#2a2a2a","--form-bg":"#181818"}},
+  {name:"Ivory & Black",desc:"Crema clásico",vars:{"--bg-primary":"#f5f0e8","--bg-secondary":"#ebe5d8","--bg-card":"#ffffff","--text-primary":"#1a1a1a","--text-secondary":"#666655","--accent":"#8b6914","--accent-hover":"#6d5010","--border":"#d0c8b8","--form-bg":"#f0ebe0"}},
+  {name:"Deep Navy",desc:"Azul oscuro + oro",vars:{"--bg-primary":"#0a0e1a","--bg-secondary":"#0f1525","--bg-card":"#141c30","--text-primary":"#e8e0d0","--text-secondary":"#7a8090","--accent":"#d4a844","--accent-hover":"#c09530","--border":"#1e2840","--form-bg":"#121a2a"}},
+  {name:"Wine & Cream",desc:"Burdeos elegante",vars:{"--bg-primary":"#0f0608","--bg-secondary":"#180a0e","--bg-card":"#1e0e14","--text-primary":"#f0e8e0","--text-secondary":"#99808a","--accent":"#c44d6e","--accent-hover":"#a83d5a","--border":"#2a1520","--form-bg":"#1a0c12"}},
+  {name:"Forest",desc:"Verde bosque + crema",vars:{"--bg-primary":"#060a06","--bg-secondary":"#0a120a","--bg-card":"#0e1a0e","--text-primary":"#e8f0e8","--text-secondary":"#7a9a7a","--accent":"#4a9a4a","--accent-hover":"#3a7a3a","--border":"#1a2a1a","--form-bg":"#0c180c"}}
+];
+</script>
+<script>
+// Palette switcher widget - inject into each landing page
+// Each page defines its own palettes in window.__PALETTES array
+(function(){
+  const palettes = window.__PALETTES || [];
+  if(!palettes.length) return;
+  
+  const root = document.documentElement;
+  let currentIdx = 0;
+  
+  // Create widget
+  const btn = document.createElement('div');
+  btn.innerHTML = '🎨';
+  Object.assign(btn.style, {position:'fixed',bottom:'24px',right:'24px',zIndex:'99999',width:'52px',height:'52px',borderRadius:'50%',background:'rgba(20,20,20,0.9)',border:'1px solid rgba(255,255,255,0.15)',cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',fontSize:'24px',boxShadow:'0 4px 24px rgba(0,0,0,0.5)',transition:'transform 0.2s',backdropFilter:'blur(12px)'});
+  btn.onmouseover=()=>btn.style.transform='scale(1.1)';
+  btn.onmouseout=()=>btn.style.transform='scale(1)';
+  
+  const panel = document.createElement('div');
+  panel.id = 'palette-panel';
+  Object.assign(panel.style, {position:'fixed',bottom:'88px',right:'24px',zIndex:'99999',width:'300px',background:'rgba(15,15,20,0.95)',border:'1px solid rgba(255,255,255,0.1)',borderRadius:'16px',padding:'0',boxShadow:'0 8px 40px rgba(0,0,0,0.6)',backdropFilter:'blur(16px)',fontFamily:'-apple-system,system-ui,sans-serif',overflow:'hidden',transform:'scale(0.9) translateY(10px)',opacity:'0',pointerEvents:'none',transition:'transform 0.25s ease, opacity 0.2s ease',maxHeight:'80vh',overflowY:'auto'});
+  
+  let open = false;
+  btn.onclick = () => {
+    open = !open;
+    panel.style.transform = open ? 'scale(1) translateY(0)' : 'scale(0.9) translateY(10px)';
+    panel.style.opacity = open ? '1' : '0';
+    panel.style.pointerEvents = open ? 'auto' : 'none';
+  };
+  
+  function applyPalette(idx) {
+    currentIdx = idx;
+    const p = palettes[idx];
+    Object.entries(p.vars).forEach(([k,v]) => root.style.setProperty(k, v));
+    renderPanel();
+  }
+  
+  function renderPanel() {
+    let html = `<div style="padding:14px 18px 10px;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center">
+      <span style="color:#fff;font-size:13px;font-weight:600;letter-spacing:0.03em">🎨 Paletas</span>
+      <button onclick="document.getElementById('palette-panel').querySelector('[data-copy]').click()" style="padding:4px 12px;font-size:11px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:6px;color:#aaa;cursor:pointer;font-family:inherit">📋 Copiar CSS</button>
+    </div><div style="padding:12px 14px">`;
+    
+    palettes.forEach((p, i) => {
+      const active = i === currentIdx;
+      const colors = Object.values(p.vars).slice(0, 5);
+      html += `<div onclick="window.__applyPalette(${i})" style="display:flex;align-items:center;gap:12px;padding:10px 12px;margin-bottom:8px;border-radius:10px;cursor:pointer;border:2px solid ${active ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.05)'};background:${active ? 'rgba(255,255,255,0.06)' : 'transparent'};transition:all 0.2s">
+        <div style="display:flex;gap:4px;flex-shrink:0">
+          ${colors.map(c => `<div style="width:22px;height:22px;border-radius:50%;background:${c};border:1px solid rgba(255,255,255,0.1)"></div>`).join('')}
+        </div>
+        <div>
+          <div style="color:#fff;font-size:12px;font-weight:600">${p.name}</div>
+          <div style="color:#666;font-size:10px">${p.desc || ''}</div>
+        </div>
+      </div>`;
+    });
+    
+    html += `</div><button data-copy style="display:none"></button>`;
+    panel.innerHTML = html;
+    panel.querySelector('[data-copy]').onclick = () => {
+      let css = ':root {\n';
+      Object.entries(palettes[currentIdx].vars).forEach(([k,v]) => { css += `  ${k}: ${v};\n`; });
+      css += '}';
+      navigator.clipboard.writeText(css).then(() => {
+        const b = panel.querySelector('button:not([data-copy])');
+        if(b){b.textContent='✓ Copiado';setTimeout(()=>b.textContent='📋 Copiar CSS',1500);}
+      });
+    };
+  }
+  
+  window.__applyPalette = applyPalette;
+  renderPanel();
+  document.body.appendChild(panel);
+  document.body.appendChild(btn);
+})();
+
+</script>
+
+</body>
+</html>
