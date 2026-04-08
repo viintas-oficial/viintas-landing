@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Viintas — Soluciones tecnológicas a la medida</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0c0c1d;
+  --bg-card: rgba(255,255,255,0.04);
+  --bg-card-border: rgba(255,255,255,0.08);
+  --text: #ffffff;
+  --text-muted: #8a8aa0;
+  --gradient-1: #7c3aed;
+  --gradient-2: #2563eb;
+  --gradient-3: #06b6d4;
+  --gradient-4: #8b5cf6;
+  --accent: #818cf8;
+  --accent-hover: #6366f1;
+  --form-bg: rgba(255,255,255,0.05);
+  --form-border: rgba(255,255,255,0.1);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--bg); color: var(--text);
+  overflow-x: hidden; -webkit-font-smoothing: antialiased;
+}
+
+/* BG */
+.bg-blob {
+  position: fixed; border-radius: 50%; filter: blur(140px); opacity: 0.25; pointer-events: none; z-index: 0;
+}
+.blob-1 { width: 600px; height: 600px; background: var(--gradient-1); top: -200px; left: -200px; }
+.blob-2 { width: 500px; height: 500px; background: var(--gradient-3); bottom: -100px; right: -200px; }
+.blob-3 { width: 350px; height: 350px; background: var(--gradient-2); top: 60%; left: 40%; }
+
+/* Grid pattern overlay */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 16px 0;
+  background: rgba(12,12,29,0.5);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.nav-inner {
+  max-width: 1120px; margin: 0 auto; padding: 0 24px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.logo { font-weight: 800; font-size: 1.15rem; letter-spacing: 0.1em; color: var(--text); text-decoration: none; }
+.nav-links { display: flex; align-items: center; gap: 32px; }
+.nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  background: rgba(255,255,255,0.08); color: var(--text) !important; padding: 8px 22px;
+  border-radius: 8px; font-weight: 600; font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.1);
+  transition: all 0.2s;
+}
+.nav-cta:hover { background: rgba(255,255,255,0.14); }
+
+/* GLASS */
+.glass {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--bg-card-border);
+  border-radius: 16px;
+}
+
+.container { max-width: 1120px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+section { padding: 120px 0; }
+
+/* HERO */
+.hero { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; }
+.hero-content { max-width: 680px; }
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px; border-radius: 6px;
+  background: rgba(129,140,248,0.1); border: 1px solid rgba(129,140,248,0.15);
+  color: var(--accent); font-size: 0.8rem; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 28px;
+}
+.hero-tag::before {
+  content: ''; display: block; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent); animation: pulse-dot 2s infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.hero h1 {
+  font-size: clamp(2.8rem, 6vw, 4.2rem); font-weight: 800;
+  line-height: 1.08; letter-spacing: -0.03em;
+}
+.hero h1 .gradient-text {
+  background: linear-gradient(135deg, var(--gradient-1), var(--gradient-3));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero p {
+  margin-top: 24px; font-size: 1.15rem; color: var(--text-muted);
+  max-width: 520px; line-height: 1.75; font-weight: 400;
+}
+.hero-actions { margin-top: 40px; display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-primary {
+  padding: 14px 28px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+  color: #fff; text-decoration: none; font-weight: 600; font-size: 0.95rem;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-ghost {
+  padding: 14px 28px; border-radius: 10px; background: transparent;
+  border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted);
+  text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: all 0.2s;
+}
+.btn-ghost:hover { border-color: rgba(255,255,255,0.25); color: var(--text); }
+
+/* HERO VISUAL */
+.hero-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.hero-visual { position: relative; }
+.hero-mockup {
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px; padding: 32px; min-height: 380px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.mockup-bar {
+  display: flex; gap: 6px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.mockup-dot { width: 8px; height: 8px; border-radius: 50%; }
+.mockup-dot:nth-child(1) { background: #ff5f57; }
+.mockup-dot:nth-child(2) { background: #ffbd2e; }
+.mockup-dot:nth-child(3) { background: #28c840; }
+.mockup-line {
+  height: 10px; border-radius: 4px; background: rgba(255,255,255,0.06);
+  animation: shimmer 2s infinite;
+}
+.mockup-line:nth-child(2) { width: 80%; }
+.mockup-line:nth-child(3) { width: 60%; }
+.mockup-line:nth-child(4) { width: 90%; }
+.mockup-line:nth-child(5) { width: 45%; }
+.mockup-block {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px;
+}
+.mockup-card {
+  height: 80px; border-radius: 10px;
+  background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(6,182,212,0.1));
+  border: 1px solid rgba(255,255,255,0.05);
+}
+@keyframes shimmer {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* WHAT WE DO */
+.what-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  background: rgba(255,255,255,0.05); border-radius: 16px; overflow: hidden;
+  margin-top: 56px;
+}
+.what-card {
+  padding: 48px 36px; background: var(--bg); transition: background 0.3s;
+}
+.what-card:hover { background: rgba(255,255,255,0.02); }
+.what-number {
+  font-size: 0.75rem; font-weight: 700; color: var(--accent);
+  letter-spacing: 0.15em; margin-bottom: 20px;
+}
+.what-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; line-height: 1.3; }
+.what-card p { color: var(--text-muted); line-height: 1.7; font-size: 0.92rem; }
+
+.section-label {
+  color: var(--accent); font-weight: 600; font-size: 0.8rem;
+  text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 12px;
+}
+.section-title {
+  font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800;
+  letter-spacing: -0.02em; line-height: 1.12;
+}
+.section-sub {
+  color: var(--text-muted); font-size: 1.05rem; max-width: 540px;
+  margin-top: 16px; line-height: 1.65;
+}
+
+/* APPROACH */
+.approach-layout {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+  margin-top: 56px;
+}
+.approach-sticky { position: sticky; top: 120px; }
+.approach-steps { display: flex; flex-direction: column; gap: 2px; }
+.approach-step {
+  padding: 32px; background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.04); border-radius: 12px;
+  transition: all 0.3s;
+}
+.approach-step:hover {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(129,140,248,0.2);
+}
+.step-num {
+  font-size: 0.7rem; font-weight: 700; color: var(--accent);
+  letter-spacing: 0.15em; margin-bottom: 12px;
+}
+.approach-step h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+.approach-step p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.65; }
+
+/* STATS */
+.stats-strip {
+  display: flex; justify-content: center; gap: 0; margin-top: 64px;
+  background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px; overflow: hidden;
+}
+.stat-item {
+  flex: 1; padding: 48px 32px; text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+.stat-item:last-child { border-right: none; }
+.stat-num {
+  font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em;
+  background: linear-gradient(135deg, var(--gradient-1), var(--gradient-3));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.stat-label { color: var(--text-muted); font-size: 0.85rem; margin-top: 8px; font-weight: 500; }
+
+/* FORM */
+.form-section { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.form-left h2 {
+  font-size: clamp(2rem, 4vw, 2.6rem); font-weight: 800;
+  line-height: 1.12; letter-spacing: -0.02em;
+}
+.form-left h2 .gradient-text {
+  background: linear-gradient(135deg, var(--gradient-1), var(--gradient-3));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.form-left p { color: var(--text-muted); margin-top: 16px; line-height: 1.7; font-size: 1rem; }
+.form-features { margin-top: 32px; display: flex; flex-direction: column; gap: 16px; }
+.form-feature {
+  display: flex; align-items: flex-start; gap: 12px;
+  color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;
+}
+.form-feature-icon {
+  width: 20px; height: 20px; border-radius: 4px; flex-shrink: 0; margin-top: 2px;
+  background: linear-gradient(135deg, var(--gradient-1), var(--gradient-3));
+  display: flex; align-items: center; justify-content: center;
+}
+.form-feature-icon::after {
+  content: ''; display: block; width: 8px; height: 4px;
+  border-left: 2px solid #fff; border-bottom: 2px solid #fff;
+  transform: rotate(-45deg) translateY(-1px);
+}
+.form-card { padding: 36px; }
+.form-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 24px; }
+.form-row { margin-bottom: 14px; }
+.form-row label {
+  display: block; font-size: 0.78rem; font-weight: 600; color: var(--text-muted);
+  margin-bottom: 6px; letter-spacing: 0.03em;
+}
+.form-card input, .form-card select {
+  width: 100%; padding: 13px 16px;
+  background: var(--form-bg); border: 1px solid var(--form-border);
+  border-radius: 10px; color: var(--text); font-size: 0.95rem;
+  font-family: inherit; outline: none; transition: border-color 0.2s;
+}
+.form-card input:focus, .form-card select:focus { border-color: var(--accent); }
+.form-card input::placeholder { color: #444; }
+.form-card select { appearance: none; cursor: pointer; }
+.form-card select option { background: #1a1a2e; }
+.form-submit {
+  width: 100%; padding: 15px; border: none; border-radius: 10px;
+  background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+  color: #fff; font-size: 0.95rem; font-weight: 700; font-family: inherit;
+  cursor: pointer; transition: opacity 0.2s, transform 0.2s; margin-top: 8px;
+}
+.form-submit:hover { opacity: 0.9; transform: translateY(-1px); }
+.form-note {
+  text-align: center; color: #444; font-size: 0.78rem; margin-top: 14px;
+}
+
+/* PORTFOLIO */
+.portfolio-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+}
+.portfolio-card {
+  background: var(--bg-card);
+  border: 1px solid var(--bg-card-border);
+  border-radius: 16px; overflow: hidden;
+  transition: all 0.3s; text-decoration: none; color: inherit;
+  display: flex; flex-direction: column;
+}
+.portfolio-card:hover {
+  border-color: rgba(129,140,248,0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+}
+.portfolio-img {
+  height: 180px; display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.portfolio-icon {
+  font-size: 3.5rem; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+}
+.portfolio-body {
+  padding: 28px; flex: 1; display: flex; flex-direction: column;
+}
+.portfolio-body h3 {
+  font-size: 1.15rem; font-weight: 700; margin-bottom: 8px;
+}
+.portfolio-body p {
+  color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; flex: 1;
+}
+.portfolio-link {
+  display: inline-block; margin-top: 16px;
+  color: var(--accent); font-size: 0.85rem; font-weight: 600;
+  transition: color 0.2s;
+}
+.portfolio-card:hover .portfolio-link { color: var(--accent-hover); }
+.portfolio-soon {
+  cursor: default; opacity: 0.65;
+}
+.portfolio-soon:hover {
+  transform: none; border-color: var(--bg-card-border);
+  box-shadow: none;
+}
+.portfolio-soon-badge {
+  display: inline-block; margin-top: 16px;
+  padding: 5px 14px; border-radius: 6px;
+  background: rgba(129,140,248,0.1); border: 1px solid rgba(129,140,248,0.15);
+  color: var(--accent); font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+/* FOOTER */
+footer {
+  padding: 48px 24px; text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  position: relative; z-index: 1;
+}
+.footer-inner {
+  max-width: 1120px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+.footer-links a:hover { color: var(--text); }
+footer small { color: #444; font-size: 0.8rem; }
+
+/* FADE */
+.fade-up { opacity: 0; transform: translateY(24px); transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 768px) {
+  .hero-layout { grid-template-columns: 1fr; gap: 40px; }
+  .hero-visual { display: none; }
+  .what-grid { grid-template-columns: 1fr; }
+  .approach-layout { grid-template-columns: 1fr; gap: 40px; }
+  .approach-sticky { position: static; }
+  .stats-strip { flex-direction: column; }
+  .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .stat-item:last-child { border-bottom: none; }
+  .form-section { grid-template-columns: 1fr; }
+  .nav-links a:not(.nav-cta) { display: none; }
+  .footer-inner { flex-direction: column; gap: 16px; }
+  .portfolio-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-blob blob-1"></div>
+<div class="bg-blob blob-2"></div>
+<div class="bg-blob blob-3"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">VIINTAS</a>
+    <div class="nav-links">
+      <a href="#servicios">Servicios</a>
+      <a href="#como">Proceso</a>
+      <a href="#casos">Casos</a>
+      <a href="#portfolio">Portafolio</a>
+      <a href="#registro" class="nav-cta">Hablemos</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-layout">
+      <div class="hero-content fade-up">
+        <div class="hero-tag">Desarrollo a la medida</div>
+        <h1>Construimos la tecnología que <span class="gradient-text">tu negocio necesita</span></h1>
+        <p>Diseñamos, desarrollamos y desplegamos soluciones tecnológicas completas — desde la arquitectura hasta la operación — para negocios que necesitan algo que realmente funcione.</p>
+        <div class="hero-actions">
+          <a href="#registro" class="btn-primary">Agendar una reunión</a>
+          <a href="#servicios" class="btn-ghost">Conocer servicios</a>
+        </div>
+      </div>
+      <div class="hero-visual fade-up">
+        <div class="hero-mockup">
+          <div class="mockup-bar">
+            <div class="mockup-dot"></div>
+            <div class="mockup-dot"></div>
+            <div class="mockup-dot"></div>
+          </div>
+          <div class="mockup-line"></div>
+          <div class="mockup-line"></div>
+          <div class="mockup-line"></div>
+          <div class="mockup-line"></div>
+          <div class="mockup-block">
+            <div class="mockup-card"></div>
+            <div class="mockup-card"></div>
+            <div class="mockup-card"></div>
+            <div class="mockup-card"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="servicios">
+  <div class="container">
+    <div class="fade-up">
+      <p class="section-label">Servicios</p>
+      <h2 class="section-title">Todo lo que necesitas.<br>Un solo equipo.</h2>
+      <p class="section-sub">Desde la estrategia hasta la implementación. No subcontratamos, no improvisamos. Tu proyecto tiene un equipo dedicado de principio a fin.</p>
+    </div>
+    <div class="what-grid">
+      <div class="what-card fade-up">
+        <div class="what-number">01</div>
+        <h3>Plataformas web y móvil</h3>
+        <p>Aplicaciones completas con gestión multi-sucursal, reportes en tiempo real, y flujos operativos diseñados para tu negocio específico.</p>
+      </div>
+      <div class="what-card fade-up">
+        <div class="what-number">02</div>
+        <h3>Integraciones y automatización</h3>
+        <p>Conectamos tus sistemas existentes — pasarelas de pago, facturación, logística, CRM — en una operación unificada y eficiente.</p>
+      </div>
+      <div class="what-card fade-up">
+        <div class="what-number">03</div>
+        <h3>Consultoría tecnológica</h3>
+        <p>Analizamos tu operación, identificamos oportunidades de mejora, y definimos la arquitectura tecnológica que tu negocio necesita para escalar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="como">
+  <div class="container">
+    <div class="approach-layout">
+      <div class="approach-sticky fade-up">
+        <p class="section-label">Proceso</p>
+        <h2 class="section-title">Metodología clara, resultados medibles</h2>
+        <p class="section-sub">Cada proyecto sigue un proceso probado. Sabes exactamente en qué etapa está tu desarrollo, qué viene después, y cuándo estará listo.</p>
+      </div>
+      <div class="approach-steps">
+        <div class="approach-step fade-up">
+          <div class="step-num">FASE 01</div>
+          <h4>Descubrimiento</h4>
+          <p>Entendemos tu operación a fondo: sucursales, equipos, procesos, puntos de dolor. Mapeamos todo antes de escribir una línea de código.</p>
+        </div>
+        <div class="approach-step fade-up">
+          <div class="step-num">FASE 02</div>
+          <h4>Arquitectura y diseño</h4>
+          <p>Definimos la estructura técnica, los flujos de usuario, y el diseño visual. Validamos contigo cada decisión antes de construir.</p>
+        </div>
+        <div class="approach-step fade-up">
+          <div class="step-num">FASE 03</div>
+          <h4>Desarrollo e iteración</h4>
+          <p>Construimos en sprints con entregas funcionales cada semana. Ves avances reales, das feedback, y ajustamos en tiempo real.</p>
+        </div>
+        <div class="approach-step fade-up">
+          <div class="step-num">FASE 04</div>
+          <h4>Lanzamiento y soporte</h4>
+          <p>Desplegamos, capacitamos a tu equipo, y te acompañamos post-lanzamiento. Tu plataforma evoluciona contigo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="casos">
+  <div class="container">
+    <div class="fade-up" style="text-align:center;margin-bottom:56px">
+      <p class="section-label">Lo que construimos</p>
+      <h2 class="section-title">Soluciones reales para negocios reales</h2>
+      <p class="section-sub" style="margin-left:auto;margin-right:auto">Cada proyecto es diferente. Estas son algunas de las soluciones que hemos diseñado y puesto en operación.</p>
+    </div>
+    <div class="what-grid">
+      <div class="what-card fade-up">
+        <div class="what-number">CASO</div>
+        <h3>Club deportivo con gestión de membresías</h3>
+        <p>Plataforma completa con registro de atletas, cobro recurrente, torneos, tienda en línea, y portal público para cada sede. Operando en producción.</p>
+      </div>
+      <div class="what-card fade-up">
+        <div class="what-number">CASO</div>
+        <h3>Red de comercios con catálogo y checkout</h3>
+        <p>Storefronts individuales por negocio con dominio propio, pasarela de pagos integrada, panel administrativo, y analytics por tienda.</p>
+      </div>
+      <div class="what-card fade-up">
+        <div class="what-number">CASO</div>
+        <h3>Cadena de servicios con agendamiento</h3>
+        <p>Sistema multi-sede con reservas en línea, gestión de recursos por sucursal, notificaciones automáticas, y dashboard operativo centralizado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="stats-strip fade-up">
+      <div class="stat-item">
+        <div class="stat-num">7+</div>
+        <div class="stat-label">Plataformas en producción</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">50+</div>
+        <div class="stat-label">Negocios operando</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">LATAM</div>
+        <div class="stat-label">Cobertura regional</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Desarrollo propio</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="registro">
+  <div class="container">
+    <div class="form-section">
+      <div class="form-left fade-up">
+        <h2>Cuéntanos sobre <span class="gradient-text">tu proyecto</span></h2>
+        <p>Agendamos una reunión sin compromiso para entender tu operación y proponerte una solución a la medida.</p>
+        <div class="form-features">
+          <div class="form-feature">
+            <div class="form-feature-icon"></div>
+            <span>Reunión de descubrimiento sin costo</span>
+          </div>
+          <div class="form-feature">
+            <div class="form-feature-icon"></div>
+            <span>Propuesta técnica y comercial en 48 horas</span>
+          </div>
+          <div class="form-feature">
+            <div class="form-feature-icon"></div>
+            <span>Equipo dedicado a tu proyecto</span>
+          </div>
+          <div class="form-feature">
+            <div class="form-feature-icon"></div>
+            <span>Soporte continuo post-lanzamiento</span>
+          </div>
+        </div>
+      </div>
+      <div class="glass form-card fade-up">
+        <h3 id="form-title">Hablemos de tu proyecto</h3>
+        <form id="contact-form" name="contacto" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="contacto">
+          <p style="display:none"><label>No llenar: <input name="bot-field"></label></p>
+          <div class="form-row">
+            <label>Nombre</label>
+            <input type="text" name="nombre" placeholder="Tu nombre completo" required>
+          </div>
+          <div class="form-row">
+            <label>Correo electrónico</label>
+            <input type="email" name="email" placeholder="correo@tunegocio.com" required>
+          </div>
+          <div class="form-row">
+            <label>Negocio</label>
+            <input type="text" name="negocio" placeholder="Nombre de tu negocio" required>
+          </div>
+          <div class="form-row">
+            <label>Teléfono</label>
+            <input type="tel" name="telefono" placeholder="+57 300 000 0000" required>
+          </div>
+          <div class="form-row">
+            <label>Tipo de negocio</label>
+            <select name="tipo" required>
+              <option value="" disabled selected>Selecciona una opción</option>
+              <option>Restaurantes y alimentos</option>
+              <option>Retail y comercio</option>
+              <option>Deportes y entretenimiento</option>
+              <option>Servicios profesionales</option>
+              <option>Salud y bienestar</option>
+              <option>Logística y operaciones</option>
+              <option>Otro</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>Cuéntanos brevemente qué necesitas</label>
+            <input type="text" name="descripcion" placeholder="Ej: Sistema de gestión para 8 sucursales de restaurante">
+          </div>
+          <button type="submit" class="form-submit">Agendar reunión</button>
+          <p class="form-note">Sin compromiso. Respondemos en menos de 24 horas.</p>
+        </form>
+        <div id="form-success" style="display:none;text-align:center;padding:40px 20px">
+          <div style="font-size:2.5rem;margin-bottom:16px">&#10003;</div>
+          <h3 style="font-size:1.3rem;margin-bottom:12px">Mensaje recibido</h3>
+          <p style="color:var(--text-muted);line-height:1.6">Te contactaremos en menos de 24 horas para agendar una reunión y entender tu proyecto a fondo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="portfolio">
+  <div class="container">
+    <div class="fade-up" style="text-align:center;margin-bottom:56px">
+      <p class="section-label">Portafolio</p>
+      <h2 class="section-title">Menús digitales en operación</h2>
+      <p class="section-sub" style="margin-left:auto;margin-right:auto">Restaurantes y negocios que ya usan nuestras soluciones TuMenú para ofrecer una experiencia digital a sus clientes.</p>
+    </div>
+    <div class="portfolio-grid">
+      <a href="https://ranchoin.viintas.com" target="_blank" rel="noopener" class="portfolio-card fade-up">
+        <div class="portfolio-img" style="background:linear-gradient(135deg,rgba(234,88,12,0.25),rgba(220,38,38,0.15))">
+          <div class="portfolio-icon">🥩</div>
+        </div>
+        <div class="portfolio-body">
+          <h3>Rancho In</h3>
+          <p>Restaurante parrilla con menú digital interactivo y gestión de pedidos.</p>
+          <span class="portfolio-link">ranchoin.viintas.com →</span>
+        </div>
+      </a>
+      <a href="https://p.viintas.com" target="_blank" rel="noopener" class="portfolio-card fade-up">
+        <div class="portfolio-img" style="background:linear-gradient(135deg,rgba(234,179,8,0.25),rgba(234,88,12,0.15))">
+          <div class="portfolio-icon">🍕</div>
+        </div>
+        <div class="portfolio-body">
+          <h3>El Sorbettiko</h3>
+          <p>Cadena de restaurantes con menú digital, promociones y experiencia de pedido online.</p>
+          <span class="portfolio-link">p.viintas.com →</span>
+        </div>
+      </a>
+      <a href="https://restaurante-prueba.viintas.com" target="_blank" rel="noopener" class="portfolio-card fade-up">
+        <div class="portfolio-img" style="background:linear-gradient(135deg,rgba(220,38,38,0.25),rgba(190,18,60,0.15))">
+          <div class="portfolio-icon">🔥</div>
+        </div>
+        <div class="portfolio-body">
+          <h3>Brasa Gourmet</h3>
+          <p>Restaurante gourmet con carta digital, reservas y sistema de recomendaciones.</p>
+          <span class="portfolio-link">restaurante-prueba.viintas.com →</span>
+        </div>
+      </a>
+      <div class="portfolio-card portfolio-soon fade-up">
+        <div class="portfolio-img" style="background:linear-gradient(135deg,rgba(100,116,139,0.2),rgba(71,85,105,0.1))">
+          <div class="portfolio-icon">🍽️</div>
+        </div>
+        <div class="portfolio-body">
+          <h3>Los Labriegos</h3>
+          <p>Restaurante tradicional colombiano — próximamente con menú digital TuMenú.</p>
+          <span class="portfolio-soon-badge">En configuración</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <small>© 2026 Viintas. Todos los derechos reservados.</small>
+    <div class="footer-links">
+      <a href="#">Privacidad</a>
+      <a href="#">Términos</a>
+      <a href="#">Contacto</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+// Form submission → Supabase CRM
+const SUPABASE_URL = 'https://ivylcrxmrolrwxbcijqe.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml2eWxjcnhtcm9scnd4YmNpanFlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxNTE4NDIsImV4cCI6MjA4NzcyNzg0Mn0.1-5Nsl6SkLF7Z7cRxeQ66koWldfLn3l7ju1rnEenO58';
+
+// Anti-bot: track when form became visible
+let formLoadTime = Date.now();
+
+// Detect gibberish strings (high consonant ratio, no real words)
+function looksLikeGibberish(str) {
+  if (!str || str.length < 3) return false;
+  const clean = str.replace(/[^a-zA-ZáéíóúñÁÉÍÓÚÑ]/g, '');
+  if (clean.length < 3) return false;
+  // Count consecutive consonants (3+ in a row = suspicious)
+  const chunks = clean.toLowerCase().split(/[aeiouáéíóú]+/);
+  const longConsonantRuns = chunks.filter(c => c.length >= 4).length;
+  if (longConsonantRuns >= 2) return true;
+  // Ratio check: if >70% consonants, likely gibberish
+  const vowels = (clean.match(/[aeiouáéíóú]/gi) || []).length;
+  if (clean.length > 6 && vowels / clean.length < 0.2) return true;
+  // Mixed case chaos (e.g. "LsZQOzltiqIcYXtGB")
+  if (clean.length > 8) {
+    const caseChanges = clean.split('').filter((c,i) => i > 0 && ((c === c.toUpperCase() && clean[i-1] === clean[i-1].toLowerCase()) || (c === c.toLowerCase() && clean[i-1] === clean[i-1].toUpperCase()))).length;
+    if (caseChanges / clean.length > 0.4) return true;
+  }
+  return false;
+}
+
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const form = e.target;
+  const fd = new FormData(form);
+  const btn = form.querySelector('.form-submit');
+
+  // Anti-bot check 1: honeypot field
+  if (fd.get('bot-field')) {
+    form.style.display = 'none';
+    document.getElementById('form-title').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+    return;
+  }
+
+  // Anti-bot check 2: too fast (<3 seconds)
+  if (Date.now() - formLoadTime < 3000) {
+    form.style.display = 'none';
+    document.getElementById('form-title').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+    return;
+  }
+
+  // Anti-bot check 3: gibberish detection
+  if (looksLikeGibberish(fd.get('nombre')) || looksLikeGibberish(fd.get('negocio')) || looksLikeGibberish(fd.get('descripcion'))) {
+    form.style.display = 'none';
+    document.getElementById('form-title').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+    return;
+  }
+
+  btn.textContent = 'Enviando...';
+  btn.disabled = true;
+
+  const lead = {
+    business_name: fd.get('negocio'),
+    contact_name: fd.get('nombre'),
+    email: fd.get('email'),
+    phone: fd.get('telefono'),
+    business_type: fd.get('tipo'),
+    description: fd.get('descripcion') || null,
+    vertical: fd.get('tipo') || 'general',
+    source: 'inbound',
+    stage: 'qualified',
+    notes: 'Lead desde viintas.com landing page',
+    tags: ['landing-page', 'viintas.com']
+  };
+
+  fetch(SUPABASE_URL + '/rest/v1/leads', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': SUPABASE_ANON,
+      'Authorization': 'Bearer ' + SUPABASE_ANON,
+      'Prefer': 'return=minimal'
+    },
+    body: JSON.stringify(lead)
+  })
+  .then(r => {
+    if (!r.ok) throw new Error(r.status);
+    form.style.display = 'none';
+    document.getElementById('form-title').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  })
+  .catch(() => {
+    // Show success anyway (don't block the user), log error
+    form.style.display = 'none';
+    document.getElementById('form-title').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+    console.error('Error saving lead to CRM');
+  });
+});
+</script>
+
+</body>
+</html>
