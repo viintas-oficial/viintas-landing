@@ -108,6 +108,16 @@ section { padding: 40px 0 120px; }
 .portfolio-card:hover .portfolio-logo {
   transform: scale(1.05);
 }
+.portfolio-text-logo {
+  position: relative; z-index: 1;
+  font-size: 1.8rem; font-weight: 800;
+  letter-spacing: -0.02em; color: #fff;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+  transition: transform 0.3s;
+}
+.portfolio-card:hover .portfolio-text-logo {
+  transform: scale(1.05);
+}
 
 .portfolio-body { padding: 28px 28px 32px; flex: 1; display: flex; flex-direction: column; }
 .portfolio-body h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 6px; }
@@ -234,7 +244,7 @@ footer small { color: #444; font-size: 0.8rem; }
 
       <a href="https://tumenu.viintas.com/p/xv5l0z" target="_blank" rel="noopener" class="portfolio-card fade-up">
         <div class="portfolio-header" style="background:linear-gradient(135deg,#1a1005 0%,#3d2a0a 50%,#1a1005 100%)">
-          <img src="https://viintas-strapi-assets.s3.us-east-1.amazonaws.com/logo_capriatto_e30a826061.png" alt="El Sorbettiko" class="portfolio-logo">
+          <div class="portfolio-text-logo">El Sorbettiko</div>
         </div>
         <div class="portfolio-body">
           <span class="tag">Heladería</span>
