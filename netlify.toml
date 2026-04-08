@@ -1,5 +1,5 @@
 [[redirects]]
   from = "/portfolio.html"
-  to = "/portfolio"
+  to = "/portfolio/"
   status = 301
   force = true
