@@ -1,3 +1,12 @@
+# El hook de Supabase Auth apunta acá. Ruta limpia y no /.netlify/functions/…
+# para que el día que esto crezca a un servicio de notificaciones, la URL que
+# quedó configurada en Supabase no tenga que cambiar.
+[[redirects]]
+  from = "/api/notifications/auth/send-sms"
+  to = "/.netlify/functions/auth-send-sms"
+  status = 200
+  force = true
+
 [[redirects]]
   from = "/portfolio.html"
   to = "/portfolio/"
